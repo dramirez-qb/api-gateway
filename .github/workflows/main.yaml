@@ -35,6 +35,7 @@ jobs:
           config: tests/ct.yaml
   release:
     needs: lint-test
+    environment: default
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
