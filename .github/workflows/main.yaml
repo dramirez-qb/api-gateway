@@ -61,6 +61,6 @@ jobs:
           helm repo add fulllearn https://fulllearn.duckdns.org/charts
 
       - name: Run chart-releaser
-        uses: helm/chart-releaser-action@v1.0.0-alpha.2
+        uses: helm/chart-releaser-action@v1.1.0
         env:
           CR_TOKEN: "${{ secrets.CR_TOKEN }}"
