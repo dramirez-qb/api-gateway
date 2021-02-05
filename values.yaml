@@ -49,19 +49,6 @@ kong:
     # adminHttpNodePort: 31080
     # adminHttpsNodePort:
   
-    ## loadBalancerIP for the PrestaShop Service (optional, cloud specific)
-    ## ref: http://kubernetes.io/docs/user-guide/services/#type-loadbalancer
-    ##
-    loadBalancerIP:
-  
-    ## Provide any additional annotations which may be required. This can be used to
-    ## set the LoadBalancer service type to internal only.
-    ## ref: https://kubernetes.io/docs/concepts/services-networking/service/#internal-load-balancer
-    ##
-    annotations: {}
-    ## Extra ports to expose (normally used with the `sidecar` value)
-    # extraPorts:
-  
   ## Prometheus metrics
   ##
   metrics:
