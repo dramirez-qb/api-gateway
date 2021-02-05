@@ -1,0 +1,114 @@
+cert-manager:
+  installCRDs: true
+
+  ingressShim:
+    defaultIssuerName: "letsencrypt-staging"
+    defaultIssuerKind: "ClusterIssuer"
+    defaultIssuerGroup: "cert-manager.io"
+
+  prometheus:
+    enabled: true
+
+kong:
+  ## Number of kong Pod replicas
+  ##
+  replicaCount: 1
+  ## Select database: can be either postgresql or cassandra
+  ##
+  database: postgresql
+
+  ## Service parameters
+  ##
+  service:
+    ## K8s service type
+    ##
+    type: LoadBalancer
+  
+    ## kong proxy HTTP service port
+    ##
+    proxyHttpPort: 80
+    ## kong proxy HTTPS service port
+    ##
+    proxyHttpsPort: 443
+  
+    ## Include the admin ports in the service
+    ##
+    exposeAdmin: true
+    ## kong proxy HTTP service port
+    ##
+    adminHttpPort: 8001
+    ## kong proxy HTTPS service port
+    ##
+    adminHttpsPort: 8444
+  
+    ## Specify the nodePort value for the LoadBalancer and NodePort service types.
+    ## ref: https://kubernetes.io/docs/concepts/services-networking/service/#type-nodeport
+    ##
+    proxyHttpNodePort: 30080
+    proxyHttpsNodePort: 30443
+    # adminHttpNodePort: 31080
+    # adminHttpsNodePort:
+  
+    ## loadBalancerIP for the PrestaShop Service (optional, cloud specific)
+    ## ref: http://kubernetes.io/docs/user-guide/services/#type-loadbalancer
+    ##
+    loadBalancerIP:
+  
+    ## Provide any additional annotations which may be required. This can be used to
+    ## set the LoadBalancer service type to internal only.
+    ## ref: https://kubernetes.io/docs/concepts/services-networking/service/#internal-load-balancer
+    ##
+    annotations: {}
+    ## Extra ports to expose (normally used with the `sidecar` value)
+    # extraPorts:
+  
+  ## Prometheus metrics
+  ##
+  metrics:
+    enabled: true
+  
+    ## Kong metrics service configuration
+    ##
+    service:
+      annotations:
+        prometheus.io/scrape: "true"
+        prometheus.io/port: "{{ .Values.metrics.service.port }}"
+        prometheus.io/path: "/metrics"
+      type: ClusterIP
+      port: 9119
+  
+  autoscaling:
+    enabled: false
+    apiVersion: autoscaling/v2beta1
+    minReplicas: 2
+    maxReplicas: 5
+    metrics:
+      - type: Resource
+        resource:
+          name: cpu
+          targetAverageUtilization: 80
+  
+  ## Kong Pod Disruption Budget
+  ## ref: https://kubernetes.io/docs/concepts/workloads/pods/disruptions/
+  ##
+  pdb:
+    enabled: true
+    maxUnavailable: "50%"
+  
+  ## Extra objects to deploy (value evaluated as a template)
+  ##
+  extraDeploy: []
+  
+  ## PostgreSQL properties
+  ##
+  postgresql:
+    ## Deploy the postgresql sub-chart
+    ##
+    enabled: true
+    ## Name of the Database for Kong to access
+    ##
+    postgresqlDatabase: kong
+  
+    ## Create a username in the bundled PostgreSQL installation
+    ##
+    postgresqlUsername: kong

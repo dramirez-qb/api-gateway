@@ -1,0 +1,9 @@
+dependencies:
+- name: kong
+  repository: https://charts.bitnami.com/bitnami
+  version: 3.4.0
+- name: cert-manager
+  repository: https://charts.jetstack.io
+  version: v1.1.0
+digest: sha256:7089b83e9a1b55ea549cef081a6eb505b78ddaef79de339958bb3a07f42ef739
+generated: "2021-02-05T16:17:59.694479496+02:00"

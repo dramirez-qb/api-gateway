@@ -1,0 +1,10 @@
+# See https://github.com/helm/chart-testing#configuration
+remote: origin
+target-branch: master
+chart-repos:
+  - fulllearn=https://fulllearn.duckdns.org/charts
+helm-extra-args: --timeout 800s
+check-version-increment: true
+validate-maintainers: false
+chart-dirs:
+  - .
