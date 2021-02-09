@@ -36,7 +36,7 @@ jobs:
       - run:
           name: release
           command: |
-            echo "export CR_REPO_URL=https://fulllearn.duckdns.org/charts" >> $BASH_ENV
+            echo "export CR_REPO_URL=https://harbor.dxas90.xyz/chartrepo/library" >> $BASH_ENV
             echo "export GIT_USERNAME=$CIRCLE_PROJECT_USERNAME" >> $BASH_ENV
             echo "export GIT_REPOSITORY_NAME=$CIRCLE_PROJECT_REPONAME" >> $BASH_ENV
             .circleci/install_tools.sh

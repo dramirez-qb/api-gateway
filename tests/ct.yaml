@@ -2,7 +2,7 @@
 remote: origin
 target-branch: main
 chart-repos:
-  - fulllearn=https://fulllearn.duckdns.org/charts
+  - harbor=https://harbor.dxas90.xyz/chartrepo/library
 helm-extra-args: --timeout 800s
 check-version-increment: true
 validate-maintainers: false
